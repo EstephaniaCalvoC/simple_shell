@@ -44,7 +44,7 @@ void prt_stdo(char *str)
  * @line: Command
  * Return: 0 if succes or -1 if fork fail.
  */
-int execute(char *line)
+int execute(char *ex_name, char *line)
 {
 	char *argv[4] = {NULL, NULL, NULL, NULL};
 	pid_t child_pid;
@@ -62,14 +62,13 @@ int execute(char *line)
 		argv[0] = line;
 		if (execve(argv[0], argv, NULL) == -1)
 		{
-			perror("Error");
+			perror(ex_name);
 			exit(98);
 		}
 	}
 	else
 	{
 		wait(NULL);
-		/*printf("Terminado %d\n", child_pid);*/
 	}
 	return (0);
 }
@@ -78,7 +77,7 @@ int execute(char *line)
  * main - Super simple shell.
  * Return: 0 in succes.
  */
-int main(void)
+int main(int argc, char **argv)
 {
 	char *line = NULL;
 	size_t len = 0;
@@ -89,24 +88,18 @@ int main(void)
 		/*If is interactive mode*/
 		if(isatty(STDIN_FILENO))
 			prt_stdo("#cisfun$ ");
-		/*prt_stdo("#cisfun$ ");*/
 
 		n_chars = getline(&line, &len, stdin);
 		if (n_chars == -1)
 		{
-			/*prt_stdo("EXIT\n");*/
 			if(isatty(STDIN_FILENO))
-				prt_stdo("Ahora entra aquí\n");
+				prt_stdo("\n");
 			break;
 		}
 		else if (*line != '\n')
 		{
-			prt_stdo("Entra aquí\n");
 			line[n_chars - 1] = '\0';
-			/*prt_stdo("Ejecutar el comando ");*/
-			/*prt_stdo(line);*/
-			/*prt_stdo("\n");*/
-			execute(line);
+		        execute(argv[0], line);
 			free(line);
 			line = NULL;
 		}
