@@ -1,43 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdarg.h>
-#include <sys/wait.h>
-#include <string.h>
-
-/**
- * _strlen - Count the amount of character of a string.
- * @str: String.
- * Return: Number of characters in the string.
- */
-unsigned int _strlen(char *str)
-{
-	unsigned int len = 0;
-
-	if (!str)
-		return (0);
-
-	while (str[len])
-		len++;
-
-	return (len);
-}
-
-/**
- * prt_stdo - Print simple string with write in the stdo.
- * @str: String to print.
- */
-void prt_stdo(char *str)
-{
-	ssize_t n_chars;
-	unsigned int s_len;
-
-	s_len = _strlen(str);
-	n_chars = write(STDOUT_FILENO, str, s_len);
-}
+#include "ssh.h"
 
 /**
  * execute - Execute a command indicate in a string.
