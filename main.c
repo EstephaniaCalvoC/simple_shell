@@ -1,5 +1,33 @@
 #include "ssh.h"
 
+char **get_array(char *line)
+{
+	const char limit[2] = " ";
+	int i;/*Runer*/
+	int contsp = 0;/*Counter limit*/
+	char **array = NULL;
+
+	/*Count limit char*/
+	for(i = 0 ; line[i] != 0; i++)
+	{
+		if (line[i] == limit[0])
+			contsp++;
+	}
+
+	/*Allocate memory*/
+	array = malloc(sizeof(char *) * (contsp + 2));
+
+	/*Full array*/
+	array[0] = strtok(line, limit);
+
+	for(i = 1; i <= contsp; i++)
+	{
+		array[i] = strtok(NULL, limit);
+	}
+	array[i] = NULL;
+	return (array);
+}
+
 /**
  * execute - Execute a command indicate in a string.
  * @line: Command
@@ -7,7 +35,8 @@
  */
 int execute(char *ex_name, char *line)
 {
-	char *argv[4] = {NULL, NULL, NULL, NULL};
+	/*char *argv[4] = {NULL, NULL, NULL, NULL};*/
+	char **argv = get_array(line);
 	pid_t child_pid;
 
 	child_pid = fork();
@@ -20,7 +49,7 @@ int execute(char *ex_name, char *line)
 
 	if (child_pid == 0)
 	{
-		argv[0] = line;
+		/*argv[0] = line;*/
 		if (execve(argv[0], argv, NULL) == -1)
 		{
 			perror(ex_name);
