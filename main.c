@@ -8,7 +8,7 @@ char **get_array(char *line)
 	char **array = NULL;
 
 	/*Count limit char*/
-	for(i = 0 ; line[i] != 0; i++)
+	for(i = 0 ; line[i] != '\0'; i++)
 	{
 		if (line[i] == limit[0])
 			contsp++;
