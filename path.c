@@ -39,11 +39,9 @@ char *_getenv(char *name)
 }
 
 /**
- * _getpath - Search a value of an enviroment variable.
- * @name: Name of enviroment variable.
- * Return: A pointer to the value.
+ * _create_path - Create a linked list with the directories of the path.
+ * Return: A pointer to the head of the list.
  */
-
 lpath *_create_path(void)
 {
 	char *value = NULL;
@@ -75,15 +73,15 @@ char *_getpath(char **argv)
 	struct stat buf;
 	int count = 0, len = 0;
 
-	len = _strlen(argv[0]);
+	/*If the input is a complete path*/
 	if (stat(argv[0], &buf) == 0)
 	{
-		printf("Entra sin lista\n");
 		path = strdup(argv[0]);
-		//path = malloc(sizeof(char) * (len + 1));
-		//strcat(path, argv[0]);
 		return (path);
 	}
+
+	/*If the path is not complete*/
+	len = _strlen(argv[0]);
 
 	head_path = _create_path();
 	if (head_path == NULL)
@@ -97,7 +95,7 @@ char *_getpath(char **argv)
 			free_list(head_path);
 			return(NULL);
 		}
-		strcat(path, temp->dir);
+		strcpy(path, temp->dir);
 		strcat(path, "/");
 		strcat(path, argv[0]);
 

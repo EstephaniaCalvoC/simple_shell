@@ -35,13 +35,11 @@ char **get_array(char *line)
  */
 int execute(char *ex_name, char *line)
 {
-	/*char *argv[4] = {NULL, NULL, NULL, NULL};*/
 	char **argv = get_array(line);
 	pid_t child_pid;
 	char *path = NULL;
 
 	path = _getpath(argv);
-	printf("paht: %s\n", path);
 	if (!path)
 	{
 		printf("PATH is NULL.\n");
@@ -57,8 +55,6 @@ int execute(char *ex_name, char *line)
 
 	if (child_pid == 0)
 	{
-		/*argv[0] = line;*/
-
 		if (execve(path, argv, NULL) == -1)
 		{
 			perror(ex_name);
