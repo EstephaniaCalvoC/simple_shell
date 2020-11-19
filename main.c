@@ -38,6 +38,13 @@ int execute(char *ex_name, char *line)
 	/*char *argv[4] = {NULL, NULL, NULL, NULL};*/
 	char **argv = get_array(line);
 	pid_t child_pid;
+	char *path = NULL;
+
+	path = _getpath(argv);
+	if (!path)
+	{
+		printf("PATH is NULL.\n");
+	}
 
 	child_pid = fork();
 
@@ -50,7 +57,8 @@ int execute(char *ex_name, char *line)
 	if (child_pid == 0)
 	{
 		/*argv[0] = line;*/
-		if (execve(argv[0], argv, NULL) == -1)
+
+		if (execve(path, argv, NULL) == -1)
 		{
 			perror(ex_name);
 			exit(98);
@@ -60,6 +68,8 @@ int execute(char *ex_name, char *line)
 	{
 		wait(NULL);
 	}
+	free(path);
+	free(argv);
 	return (0);
 }
 
