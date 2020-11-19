@@ -79,8 +79,9 @@ char *_getpath(char **argv)
 	if (stat(argv[0], &buf) == 0)
 	{
 		printf("Entra sin lista\n");
-		path = malloc(sizeof(char) * (len + 1));
-		strcat(path, argv[0]);
+		path = strdup(argv[0]);
+		//path = malloc(sizeof(char) * (len + 1));
+		//strcat(path, argv[0]);
 		return (path);
 	}
 

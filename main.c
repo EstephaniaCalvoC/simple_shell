@@ -41,6 +41,7 @@ int execute(char *ex_name, char *line)
 	char *path = NULL;
 
 	path = _getpath(argv);
+	printf("paht: %s\n", path);
 	if (!path)
 	{
 		printf("PATH is NULL.\n");
