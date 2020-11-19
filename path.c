@@ -26,7 +26,11 @@ char *_getenv(char *name)
 		if (b == 0)
 		{
 			value = environ[i] + len + 1;
-			return (value);
+			value = strdup(value);
+			if (value)
+				return (value);
+			else
+				return (NULL);
 		}
 		i++;
 	}
@@ -50,15 +54,17 @@ lpath *_create_path(void)
 	value = _getenv("PATH");
 	if (!value)
 	{
-	       printf("La variable PATH no fue encontrada\n");
 	       return(NULL); /* pend check */
 	}
+
+	/*Fill list*/
 	word = strtok(value, ":");
 	for (; word;)
 	{
 		add_node_end(&head, word);
-		word = strtok(NULL, value);
+		word = strtok(NULL, ":");
 	}
+	free(value);
 	return (head);
 }
 
@@ -66,34 +72,36 @@ char *_getpath(char **argv)
 {
 	lpath *head_path = NULL, *temp = NULL;
 	char *path = NULL;
-	struct stat *buf;
+	struct stat buf;
 	int count = 0, len = 0;
 
-	if (stat(argv[0], buf) == 0)
+	len = _strlen(argv[0]);
+	if (stat(argv[0], &buf) == 0)
 	{
-		printf("%s was found.\n", argv[0]);
-		return (argv[0]);
+		printf("Entra sin lista\n");
+		path = malloc(sizeof(char) * (len + 1));
+		strcat(path, argv[0]);
+		return (path);
 	}
 
 	head_path = _create_path();
 	if (head_path == NULL)
 		return (NULL);
 
-	len = _strlen(argv[0]);
 	for (temp = head_path; temp != NULL; temp = temp->next)
 	{
-		path = malloc(sizeof(char) * (temp->len + len + 1));
+		path = malloc(sizeof(char) * (temp->len + len + 2));
 		if (!path)
 		{
-			printf("PATH malloc fails.\n");
 			free_list(head_path);
 			return(NULL);
 		}
-		_strcat(path, "/");
-		_strcat(path, temp->dir);
-		if (stat(path, buf) == 0)
+		strcat(path, temp->dir);
+		strcat(path, "/");
+		strcat(path, argv[0]);
+
+		if (stat(path, &buf) == 0)
 		{
-			printf("%s was found.\n", path);
 			free_list(head_path);
 			return (path);
 		}
