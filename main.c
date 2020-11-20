@@ -40,10 +40,6 @@ int execute(char *ex_name, char *line)
 	char *path = NULL;
 
 	path = _getpath(argv);
-	if (!path)
-	{
-		printf("PATH is NULL.\n");
-	}
 
 	child_pid = fork();
 
@@ -79,17 +75,27 @@ int main(int argc, char **argv)
 	char *line = NULL;
 	size_t len = 0;
 	int n_chars = 0;
+	int file = 0;
+	FILE *fp = fopen(argv[1], "r");
+
+	if (!fp && argc > 1)
+	{
+	        fprintf(stderr, "Error opening file '%s'\n", argv[1]);
+		return (-1);
+	}
+	else if (argc == 1)
+		fp = stdin;
 
 	while (1)
 	{
 		/*If is interactive mode*/
-		if(isatty(STDIN_FILENO))
+		if(isatty(STDIN_FILENO) && fp == stdin)
 			prt_stdo("#cisfun$ ");
+		n_chars = getline(&line, &len, fp);
 
-		n_chars = getline(&line, &len, stdin);
 		if (n_chars == -1)
 		{
-			if(isatty(STDIN_FILENO))
+			if(isatty(STDIN_FILENO) && fp == stdin)
 				prt_stdo("\n");
 			break;
 		}
@@ -100,7 +106,7 @@ int main(int argc, char **argv)
 			free(line);
 			line = NULL;
 		}
-	}
+		}
 
 	free(line);
 

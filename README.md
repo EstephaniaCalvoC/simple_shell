@@ -1,4 +1,4 @@
-# sHell - Simple Shell 0.1
+# sHell - Simple Shell 0.3
 
 A simple UNIX command interpreter making as a final project of the low-level programming and algorithm quarter at Holberton School.
 
@@ -34,6 +34,35 @@ Example:
 ```
 $ echo "echo 'Holberton'" | ./sHell
 'Holberton'
+$
+```
+
+**Arguments**
+**sHell** can recive a file with the command as a argument.
+
+Example:
+```
+$ cat test_cat
+echo 'Hello'
+echo "World!"
+pwd
+$ ./sHell test_cat
+'Hello'
+"World"
+/home/user/simple_shell
+$
+```
+Note: pwd result depends of the user and the current directory.
+
+**Cat redirection**
+You can get the same result using the command cat.
+
+Example:
+```
+$ cat test_cat | ./sHell
+'Hello'
+"World"
+/home/user/simple_shell
 $
 ```
 
