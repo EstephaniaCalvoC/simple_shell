@@ -7,7 +7,7 @@
  */
 unsigned int _strlen(char *str)
 {
-        unsigned int len = 0;
+	unsigned int len = 0;
 
         if (!str)
                 return (0);
@@ -27,20 +27,12 @@ unsigned int _strlen(char *str)
 
 char *_strcat(char *dest, char *src)
 {
-	int a = 0, b = 0;
+	int index, size;
 
-	if (dest == NULL)
-		dest = "";
-	if (src == NULL)
-		src = "";
+	size = _strlen(dest);
 
-	while (dest[a] != '\0')
-		a++;
-
-	while (src[b] != '\0')
-	{
-		dest[a + b] = src[b];
-		b++;
-	}
+	for (index = size; src[index - size] != '\0'; index++)
+		dest[index] = src[index - size];
+	dest[index] = '\0';
 	return (dest);
 }
