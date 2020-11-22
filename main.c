@@ -2,7 +2,7 @@
 
 char **get_array(char *line)
 {
-	const char limit[2] = " ";
+	const char limit[] = " ";
 	int i;/*Runer*/
 	int contsp = 0;/*Counter limit*/
 	char **array = NULL;
@@ -12,17 +12,29 @@ char **get_array(char *line)
 	{
 		if (line[i] == limit[0])
 			contsp++;
-	}
+	}/*Warning! case: ls              -l*/
 
 	/*Allocate memory*/
 	array = malloc(sizeof(char *) * (contsp + 2));
+	if (!array)
+		return (NULL);
 
 	/*Full array*/
 	array[0] = strtok(line, limit);
+	if (!array[0])
+	{
+		free(array);
+		return (NULL);
+	}
 
 	for(i = 1; i <= contsp; i++)
 	{
 		array[i] = strtok(NULL, limit);
+		if (!array[i])
+		{
+			free(array);
+			return (NULL);
+		}
 	}
 	array[i] = NULL;
 	return (array);
@@ -33,37 +45,48 @@ char **get_array(char *line)
  * @line: Command
  * Return: 0 if succes or -1 if fork fail.
  */
-int execute(char *ex_name, char *line)
+int execute(char *line)
 {
-	char **argv = get_array(line);
+	char **av = NULL;/*Command arguments*/
+	char *path = NULL;/*Complet command*/
 	pid_t child_pid;
-	char *path = NULL;
+	int status, n_return = 0;
 
-	path = _getpath(argv);
+	av = get_array(line);
+	path = _getpath(av);
+
+	/*Verify acces to command*/
+	if (!av || !path || (access(path, F_OK) == -1))
+	{
+		if (errno == EACCES)
+			return (prt_error(av, 126));
+		else
+			return (prt_error(av, 127));
+	}
 
 	child_pid = fork();
 
 	if (child_pid == -1)
 	{
-		perror("Error");
-		return (-1);
+		perror("Error child:");
+		return (1);
 	}
 
 	if (child_pid == 0)
 	{
-		if (execve(path, argv, NULL) == -1)
-		{
-			perror(ex_name);
-			exit(98);
-		}
+		execve(path, av, environ);
+		if (errno == EACCES)
+			n_return = prt_error(av, 126);
+		_exit(n_return);
 	}
 	else
 	{
-		wait(NULL);
+		wait(&status);
+		n_return = WEXITSTATUS(status);
 	}
 	free(path);
-	free(argv);
-	return (0);
+	free(av);
+	return (n_return);
 }
 
 /**
@@ -75,8 +98,10 @@ int main(int argc, char **argv)
 	char *line = NULL;
 	size_t len = 0;
 	int n_chars = 0;
-	int file = 0;
+	int n_return = 0;
 	FILE *fp = fopen(argv[1], "r");
+
+	ex_name = argv[0];
 
 	if (!fp && argc > 1)
 	{
@@ -102,13 +127,12 @@ int main(int argc, char **argv)
 		else if (*line != '\n')
 		{
 			line[n_chars - 1] = '\0';
-		        execute(argv[0], line);
+		        n_return = execute(line);
 			free(line);
 			line = NULL;
 		}
-		}
+	}
 
 	free(line);
-
-	return (0);
+	return (n_return);
 }
