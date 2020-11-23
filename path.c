@@ -52,9 +52,7 @@ lpath *_create_path(void)
 
 	value = _getenv("PATH");
 	if (!value || *value == '\0')
-	{
-		return (NULL);/* pend check */
-	}
+		return (NULL);
 
 	if (value[0] == ':')
 		add_node_end(&head, "./");
@@ -83,12 +81,8 @@ char *_getpath(char **argv)
 	int count = 0, len = 0;
 
 	/*If the input is a complete path*/
-	/*if (stat(argv[0], &buf) == 0)
-	{
-		path = strdup(argv[0]);
-		return (path);
-		}*/
-	if ((argv[0][0] == '/' || argv[0][0] == '.') && stat(argv[0], &buf) == 0)
+	if ((argv[0][0] == '/' || argv[0][0] == '.') &&
+	    stat(argv[0], &buf) == 0)
 	{
 		path = strdup(argv[0]);
 		return (path);
