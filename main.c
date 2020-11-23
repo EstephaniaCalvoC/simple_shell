@@ -16,8 +16,18 @@ char **get_array(char *line)
 	/*Count limit char*/
 	for (i = 0 ; line[i] != '\0'; i++)
 	{
-		for (csp++; line[i] == limit[0]; i++)
-			;
+		//printf("Caracter: %c\n", line[i]);
+		//printf("Espacios: %d\n", contsp);
+		for (csp = 0; line[i] == limit[0]; i++)
+			csp++;
+
+		if (line[i] != '\0' && csp > 0 && (i - 1) > csp)
+		{
+			contsp++;
+			i--;
+		}
+		/*if (line[i] == limit[0])
+		  contsp++;*/
 	}
 
 	/*Allocate memory*/
