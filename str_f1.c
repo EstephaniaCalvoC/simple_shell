@@ -72,3 +72,32 @@ int _strcmp(char *s1, char *s2)
 	else
 		return (*s1 - *s2);
 }
+
+/**
+ * _strdup - this functions duplicate a string.
+ * @str: the string to copy
+ * Return: string duplicate
+ **/
+
+char *_strdup(char *str)
+{
+	char *strduplicate = NULL;
+	int counter = 0, size = 0;
+
+	i = 0;
+	if (str == NULL)
+		return (NULL);
+
+	size = _strlen(dest) + 1;
+
+	/* check malloc and free */
+	strduplicate = malloc(size * sizeof(*str));
+	if (p == NULL)
+		return (NULL);
+
+	for (; counter < size - 1; counter++)
+		strduplicate[counter] = str[counter]
+
+	strduplicate[counter] = '\0';
+	return (strduplicate);
+}
