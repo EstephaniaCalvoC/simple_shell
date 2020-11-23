@@ -95,7 +95,7 @@ char *_strdup(char *str)
 		return (NULL);
 
 	for (; counter < size - 1; counter++)
-		strduplicate[counter] = str[counter]
+		strduplicate[counter] = str[counter];
 
 	strduplicate[counter] = '\0';
 	return (strduplicate);
