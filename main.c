@@ -69,10 +69,18 @@ int execute(char *line)
 	int status, n_return = 0;
 
 	av = get_array(line);
-	path = _getpath(av);
+	if (av)
+	{
+		path = _getpath(av);
+	}
 
 	/*Verify acces to command*/
-	if (!av || !path || (access(path, F_OK) == -1))
+	if (!path)
+	{
+		//printf("El path es NULL");
+		return (prt_error(av, 127));
+	}
+	if (!av || (access(path, F_OK) == -1))
 	{
 		if (errno == EACCES)
 			return (prt_error(av, 126));
@@ -118,6 +126,8 @@ int main(int argc, char **argv)
 	int n_chars = 0;
 	int n_return = 0;
 	FILE *fp = stdin;
+
+	ex_name = argv[0];
 
 	while (1)
 	{

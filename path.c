@@ -5,7 +5,6 @@
  * @name: Name of enviroment variable.
  * Return: A pointer to the value.
  */
-
 char *_getenv(char *name)
 {
 	unsigned int i = 0;/*Runner*/
@@ -28,7 +27,9 @@ char *_getenv(char *name)
 			value = environ[i] + len + 1;
 			value = strdup(value);
 			if (value)
+			{
 				return (value);
+			}
 			else
 				return (NULL);
 		}
@@ -50,7 +51,7 @@ lpath *_create_path(void)
 	int i = 0;/*Runner*/
 
 	value = _getenv("PATH");
-	if (!value)
+	if (!value || *value == '\0')
 	{
 		return (NULL);/* pend check */
 	}
@@ -96,7 +97,9 @@ char *_getpath(char **argv)
 	len = _strlen(argv[0]);
 	head_path = _create_path();
 	if (head_path == NULL)
+	{
 		return (NULL);
+	}
 	for (temp = head_path; temp != NULL; temp = temp->next)
 	{
 		path = malloc(sizeof(char) * (temp->len + len + 2));
