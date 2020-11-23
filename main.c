@@ -1,5 +1,10 @@
 #include "ssh.h"
 
+/**
+ * get_array - Get array of command arguments
+ * @line: Line of command
+ * Return: Array of command arguments
+ */
 char **get_array(char *line)
 {
 	const char limit[] = " ";
@@ -8,11 +13,11 @@ char **get_array(char *line)
 	char **array = NULL;
 
 	/*Count limit char*/
-	for(i = 0 ; line[i] != '\0'; i++)
+	for (i = 0 ; line[i] != '\0'; i++)
 	{
 		if (line[i] == limit[0])
 			contsp++;
-	}/*Warning! case: ls              -l*/
+	}
 
 	/*Allocate memory*/
 	array = malloc(sizeof(char *) * (contsp + 2));
@@ -27,7 +32,7 @@ char **get_array(char *line)
 		return (NULL);
 	}
 
-	for(i = 1; i <= contsp; i++)
+	for (i = 1; i <= contsp; i++)
 	{
 		array[i] = strtok(NULL, limit);
 		if (!array[i])
@@ -91,6 +96,8 @@ int execute(char *line)
 
 /**
  * main - Super simple shell.
+ * @argc: Numbers of arguments.
+ * @argv: Array of shell arguments.
  * Return: 0 in succes.
  */
 int main(int argc, char **argv)
@@ -99,35 +106,25 @@ int main(int argc, char **argv)
 	size_t len = 0;
 	int n_chars = 0;
 	int n_return = 0;
-	FILE *fp = fopen(argv[1], "r");
-
-	ex_name = argv[0];
-
-	if (!fp && argc > 1)
-	{
-	        fprintf(stderr, "Error opening file '%s'\n", argv[1]);
-		return (-1);
-	}
-	else if (argc == 1)
-		fp = stdin;
+	FILE *fp = stdin;
 
 	while (1)
 	{
 		/*If is interactive mode*/
-		if(isatty(STDIN_FILENO) && fp == stdin)
+		if (isatty(STDIN_FILENO) && fp == stdin)
 			prt_stdo("#cisfun$ ");
 		n_chars = getline(&line, &len, fp);
 
 		if (n_chars == -1)
 		{
-			if(isatty(STDIN_FILENO) && fp == stdin)
+			if (isatty(STDIN_FILENO) && fp == stdin)
 				prt_stdo("\n");
 			break;
 		}
 		else if (*line != '\n')
 		{
 			line[n_chars - 1] = '\0';
-		        n_return = execute(line);
+			n_return = execute(line);
 			free(line);
 			line = NULL;
 		}
