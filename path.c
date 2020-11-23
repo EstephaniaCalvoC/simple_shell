@@ -55,6 +55,9 @@ lpath *_create_path(void)
 		return (NULL);/* pend check */
 	}
 
+	if (value[0] == ':')
+		add_node_end(&head, "./");
+
 	/*Fill list*/
 	word = strtok(value, ":");
 	for (; word;)
