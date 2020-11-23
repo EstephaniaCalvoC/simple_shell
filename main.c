@@ -10,13 +10,14 @@ char **get_array(char *line)
 	const char limit[] = " ";
 	int i;/*Runer*/
 	int contsp = 0;/*Counter limit*/
+	int csp;/*Consecutive limit*/
 	char **array = NULL;
 
 	/*Count limit char*/
 	for (i = 0 ; line[i] != '\0'; i++)
 	{
-		if (line[i] == limit[0])
-			contsp++;
+		for (csp++; line[i] == limit[0]; i++)
+			;
 	}
 
 	/*Allocate memory*/
