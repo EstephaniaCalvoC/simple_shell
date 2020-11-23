@@ -52,7 +52,7 @@ lpath *_create_path(void)
 	value = _getenv("PATH");
 	if (!value)
 	{
-	       return(NULL); /* pend check */
+		return (NULL);/* pend check */
 	}
 
 	/*Fill list*/
@@ -66,6 +66,11 @@ lpath *_create_path(void)
 	return (head);
 }
 
+/**
+ * _getpath - Get complete phat of the command
+ * @argv: Array of command arguments.
+ * Return: Return a string with the complete path.
+ */
 char *_getpath(char **argv)
 {
 	lpath *head_path = NULL, *temp = NULL;
@@ -79,26 +84,22 @@ char *_getpath(char **argv)
 		path = strdup(argv[0]);
 		return (path);
 	}
-
 	/*If the path is not complete*/
 	len = _strlen(argv[0]);
-
 	head_path = _create_path();
 	if (head_path == NULL)
 		return (NULL);
-
 	for (temp = head_path; temp != NULL; temp = temp->next)
 	{
 		path = malloc(sizeof(char) * (temp->len + len + 2));
 		if (!path)
 		{
 			free_list(head_path);
-			return(NULL);
+			return (NULL);
 		}
 		strcpy(path, temp->dir);
 		strcat(path, "/");
 		strcat(path, argv[0]);
-
 		if (stat(path, &buf) == 0)
 		{
 			free_list(head_path);
