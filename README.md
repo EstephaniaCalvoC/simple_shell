@@ -1,5 +1,7 @@
 # sHell - Simple Shell 0.3
 
+![Cover of sHELL](https://semanticadigital.com/wp-content/uploads/2017/01/cover.png)
+
 A simple UNIX command interpreter making as a final project of the low-level programming and algorithm quarter at Holberton School.
 
 ## Description
