@@ -67,6 +67,10 @@ int prt_error(char **av, int n_error)
 	case 127:
 		msg_err = err127(av);
 		break;
+	case 2:
+		if (!(_strcmp(av[0],"exit")))
+			msg_err = err2_exit(av);
+		break;
 	}
 
 	/*Print error message*/

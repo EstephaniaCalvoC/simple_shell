@@ -64,6 +64,8 @@ lpath *_create_path(void);
 /*..error*/
 int prt_error(char **av, int n_error);
 char *err126(char **av);
+char *err127(char **av);
+char *err2_exit(char **av);
 /*..helpers*/
 void prt_stdo(char *str);
 int _atoi(char *s);

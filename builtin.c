@@ -23,7 +23,10 @@ void b_exit(char **av, int *l_ret)
 		if (bn == 1)
 			n_return = _atoi(av[1]);
 		else
-			n_return = 2;/*Pending Handle error*/
+		{
+			*l_ret = 2;
+			n_return = prt_error(av, 2);/*Pending Handle error*/
+		}
 	}
 	else if (ac == 1)
 	{
@@ -32,9 +35,13 @@ void b_exit(char **av, int *l_ret)
 		else
 			n_return = *l_ret;
 	}
-	free(av);
-	free(line);
-	exit(n_return);
+
+	if (n_return != 2)
+	{
+		free(av);
+		free(line);
+		exit(n_return);
+	}
 }
 
 /**
