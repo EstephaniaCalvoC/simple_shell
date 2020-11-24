@@ -20,7 +20,7 @@ char *_getenv(char *name)
 	while (environ[i] != NULL)
 	{
 		/*Compare*/
-		b = strncmp(environ[i], name, len);
+		b = _strncmp(environ[i], name, len);
 		/*If value if found*/
 		if (b == 0)
 		{
@@ -84,7 +84,7 @@ char *_getpath(char **argv)
 	if ((argv[0][0] == '/' || argv[0][0] == '.') &&
 	    stat(argv[0], &buf) == 0)
 	{
-		path = strdup(argv[0]);
+		path = _strdup(argv[0]);
 		return (path);
 	}
 	/*If the path is not complete*/
@@ -102,9 +102,9 @@ char *_getpath(char **argv)
 			free_list(head_path);
 			return (NULL);
 		}
-		strcpy(path, temp->dir);
-		strcat(path, "/");
-		strcat(path, argv[0]);
+		_strcpy(path, temp->dir);
+		_strcat(path, "/");
+		_strcat(path, argv[0]);
 		if (stat(path, &buf) == 0)
 		{
 			free_list(head_path);
