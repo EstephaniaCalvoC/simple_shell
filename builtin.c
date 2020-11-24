@@ -29,7 +29,7 @@ int b_exit(char **av, int *l_ret)
 		}
 		if (bn == 1)
 		{
-			n_return = atoi(av[1]);
+			n_return = _atoi(av[1]);
 		}
 		else
 		{

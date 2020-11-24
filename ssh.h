@@ -52,7 +52,7 @@ typedef struct bultin_s
 
 /*Main helpers*/
 char **get_array(char *line);
-int execute(char **av);
+int execute(char **av, int *l_ret);
 int exc_ext(char **av);
 /*..builtin*/
 int b_exit(char **av, int *l_ret);
@@ -65,6 +65,7 @@ int prt_error(char **av, int n_error);
 char *err126(char **av);
 /*..helpers*/
 void prt_stdo(char *str);
+int _atoi(char *s);
 
 /*String helpers*/
 /*..str_f1*/
