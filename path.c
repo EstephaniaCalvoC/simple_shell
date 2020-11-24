@@ -25,7 +25,7 @@ char *_getenv(char *name)
 		if (b == 0)
 		{
 			value = environ[i] + len + 1;
-			value = strdup(value);
+			value = _strdup(value);
 			if (value)
 			{
 				return (value);
