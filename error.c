@@ -11,15 +11,15 @@ char *err127(char **av)
 	char *error;
 	int len;
 
-	len = strlen(ex_name) + strlen(av[0]) + 14;
+	len = _strlen(ex_name) + _strlen(av[0]) + 14;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 		return (NULL);
 
-	strcpy(error, ex_name);
-	strcat(error, ": ");
-	strcat(error, av[0]);
-	strcat(error, ": not found\n");
+	_strcpy(error, ex_name);
+	_strcat(error, ": ");
+	_strcat(error, av[0]);
+	_strcat(error, ": not found\n");
 
 	return (error);
 }
@@ -34,15 +34,15 @@ char *err126(char **av)
 	char *error;
 	int len;
 
-	len = strlen(ex_name) + strlen(av[0]) + 22;
+	len = _strlen(ex_name) + _strlen(av[0]) + 22;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 		return (NULL);
 
-	strcpy(error, ex_name);
-	strcat(error, ": ");
-	strcat(error, av[0]);
-	strcat(error, ": Permission denied\n");
+	_strcpy(error, ex_name);
+	_strcat(error, ": ");
+	_strcat(error, av[0]);
+	_strcat(error, ": Permission denied\n");
 
 	return (error);
 }
