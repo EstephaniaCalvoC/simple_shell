@@ -18,7 +18,7 @@ int b_exit(char **av, int *l_ret)
 	for (; av[ac]; ac++)
 		;
 
-	if (ac > 2)
+	if (ac >= 2)
 	{
 		for (i = 0; (bn == 1) && (av[1][i] != '\0'); i++)
 		{
