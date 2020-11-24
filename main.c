@@ -57,22 +57,43 @@ char **get_array(char *line)
 }
 
 /**
+ * fexec - Execute a builtin commands or external commands.
+ * @line: Arrays of command arguments
+ * Return: The return value of the builtin command or external command.
+*/
+int fexec(char **av)
+{
+	/*int i;
+
+	if (args[0] == NULL) {
+		// An empty command was entered.
+		return 1;
+	}
+
+	for (i = 0; i < lsh_num_builtins(); i++) {
+		if (strcmp(args[0], builtin_str[i]) == 0) {
+			return (*builtin_func[i])(args);
+		}
+	}
+
+	return lsh_launch(args);*/
+	printf("Entra a fprint\n");
+	return execute(av);
+}
+
+/**
  * execute - Execute a command indicate in a string.
- * @line: Command
+ * @av: Array of command arguments
  * Return: 0 if succes or -1 if fork fail.
  */
-int execute(char *line)
+int execute(char **av)
 {
-	char **av = NULL;/*Command arguments*/
 	char *path = NULL;/*Complet command*/
 	pid_t child_pid;
 	int status, n_return = 0;
 
-	av = get_array(line);
 	if (av)
-	{
 		path = _getpath(av);
-	}
 
 	/*Verify acces to command*/
 	if (!path)
@@ -121,7 +142,7 @@ int execute(char *line)
  */
 int main(int argc, char **argv)
 {
-	char *line = NULL;
+	char *line = NULL, **av = NULL;
 	size_t len = 0;
 	int n_chars = 0;
 	int n_return = 0;
@@ -145,12 +166,13 @@ int main(int argc, char **argv)
 		else if (*line != '\n')
 		{
 			line[n_chars - 1] = '\0';
-			n_return = execute(line);
+			av = get_array(line);
+			n_return = fexec(av);
 			free(line);
+			av = NULL;
 			line = NULL;
 		}
 	}
-
 	free(line);
 	return (n_return);
 }

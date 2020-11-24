@@ -41,7 +41,7 @@ typedef struct list
 
 /*Main helpers*/
 char **get_array(char *line);
-int execute(char *line);
+int execute(char **av);
 /*..path*/
 char *_getenv(char *name);
 char *_getpath(char **argv);
