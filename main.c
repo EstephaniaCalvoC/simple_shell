@@ -57,36 +57,37 @@ char **get_array(char *line)
 }
 
 /**
- * fexec - Execute a builtin commands or external commands.
- * @line: Arrays of command arguments
+ * execute - Execute a builtin commands or external commands.
+ * @av: Arrays of command arguments
  * Return: The return value of the builtin command or external command.
 */
-int fexec(char **av)
+int execute(char **av)
 {
-	/*int i;
+	int i;
+	builtin b_arr[] = {
+		{"exit", b_exit},
+		{"env", b_env},
+		{"cd", b_cd},
+		{NULL, NULL}
+	};
 
-	if (args[0] == NULL) {
-		// An empty command was entered.
-		return 1;
+	for (i = 0; b_arr[i].fname; i++)
+	{
+		if (strcmp(b_arr[i].fname, av[0]) == 0)
+			break;
 	}
 
-	for (i = 0; i < lsh_num_builtins(); i++) {
-		if (strcmp(args[0], builtin_str[i]) == 0) {
-			return (*builtin_func[i])(args);
-		}
-	}
-
-	return lsh_launch(args);*/
-	printf("Entra a fprint\n");
-	return execute(av);
+	if (b_arr[i].fun != NULL)
+		return (b_arr[i].fun(av));
+	return exc_ext(av);
 }
 
 /**
- * execute - Execute a command indicate in a string.
+ * exc_ext - Execute a command indicate in a string.
  * @av: Array of command arguments
  * Return: 0 if succes or -1 if fork fail.
  */
-int execute(char **av)
+int exc_ext(char **av)
 {
 	char *path = NULL;/*Complet command*/
 	pid_t child_pid;
@@ -167,7 +168,7 @@ int main(int argc, char **argv)
 		{
 			line[n_chars - 1] = '\0';
 			av = get_array(line);
-			n_return = fexec(av);
+			n_return = execute(av);
 			free(line);
 			av = NULL;
 			line = NULL;
