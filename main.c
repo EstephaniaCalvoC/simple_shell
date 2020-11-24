@@ -66,8 +66,8 @@ int execute(char **av)
 	int i;
 	builtin b_arr[] = {
 		{"exit", b_exit},
-		{"env", b_env},
-		{"cd", b_cd},
+		/*{"env", b_env},*/
+		/*{"cd", b_cd},*/
 		{NULL, NULL}
 	};
 

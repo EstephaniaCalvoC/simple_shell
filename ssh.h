@@ -45,7 +45,7 @@ typedef struct list_s
 typedef struct bultin_s
 {
 	char *fname;
-	int (*fun)(char **av);
+	int (*fun)(char **av, int *);
 } builtin;
 
 /*Prototypes*/
@@ -55,7 +55,7 @@ char **get_array(char *line);
 int execute(char **av);
 int exc_ext(char **av);
 /*..builtin*/
-int b_exit(char **av);
+int b_exit(char **av, int *l_ret);
 /*..path*/
 char *_getenv(char *name);
 char *_getpath(char **argv);
