@@ -61,15 +61,12 @@ char **get_array(char *line)
  * @av: Arrays of command arguments
  * Return: The return value of the builtin command or external command.
 */
-int execute(char **av)
+int execute(char **av, int *l_ret)
 {
 	int i;
 	builtin b_arr[] = {
 		{"exit", b_exit},
-		/*{"env", b_env},*/
-		/*{"cd", b_cd},*/
-		{NULL, NULL}
-	};
+		{NULL, NULL}};
 
 	for (i = 0; b_arr[i].fname; i++)
 	{
@@ -78,7 +75,7 @@ int execute(char **av)
 	}
 
 	if (b_arr[i].fun != NULL)
-		return (b_arr[i].fun(av));
+		return (b_arr[i].fun(av, l_ret));
 	return exc_ext(av);
 }
 
@@ -168,7 +165,7 @@ int main(int argc, char **argv)
 		{
 			line[n_chars - 1] = '\0';
 			av = get_array(line);
-			n_return = execute(av);
+			n_return = execute(av, &n_return);
 			free(line);
 			av = NULL;
 			line = NULL;
