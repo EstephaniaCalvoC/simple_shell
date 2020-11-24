@@ -45,7 +45,7 @@ typedef struct list_s
 typedef struct bultin_s
 {
 	char *fname;
-	int (*fun)(char **av, int *);
+	int (*fun)(char **av, int *l_ret);
 } builtin;
 
 /*Prototypes*/
