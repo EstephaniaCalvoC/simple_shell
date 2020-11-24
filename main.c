@@ -66,6 +66,7 @@ int execute(char **av, int *l_ret)
 	int i;
 	builtin b_arr[] = {
 		{"exit", b_exit},
+		{"env", b_env},
 		{NULL, NULL}};
 
 	for (i = 0; b_arr[i].fname; i++)
@@ -75,7 +76,10 @@ int execute(char **av, int *l_ret)
 	}
 
 	if (b_arr[i].fun != NULL)
-		return (b_arr[i].fun(av, l_ret));
+	{
+		b_arr[i].fun(av, l_ret);
+		return (*l_ret);
+	}
 	return exc_ext(av);
 }
 
