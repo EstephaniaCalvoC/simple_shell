@@ -63,6 +63,7 @@ int main(int argc, char **argv)
 	FILE *fp = stdin;
 
 	ex_name = argv[0];
+	hist = 0;
 
 	while (argc)
 	{
@@ -70,6 +71,7 @@ int main(int argc, char **argv)
 		if (isatty(STDIN_FILENO) && fp == stdin)
 			prt_stdo("#cisfun$ ");
 		n_chars = getline(&line, &len, fp);
+		hist++;
 
 		if (n_chars == -1)
 		{

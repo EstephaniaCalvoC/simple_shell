@@ -19,6 +19,7 @@
 /*Global Variables*/
 extern char **environ;/*Environemnt*/
 char *ex_name; /*;Shell's executable name*/
+int hist;/*Number of line in the shell*/
 
 /*Structures*/
 
@@ -66,7 +67,7 @@ char *_getpath(char **argv);
 lpath *_create_path(void);
 /*..error*/
 int prt_error(char **av, int n_error);
-char *err126(char **av);
+char *err126(char **av, char *str_hist);
 char *err127(char **av);
 char *err2_exit(char **av);
 /*..helpers*/
