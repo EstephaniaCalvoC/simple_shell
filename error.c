@@ -6,18 +6,20 @@
 * @av: Array of command arguments.
 * Return: A string with the error message.
 */
-char *err127(char **av)
+char *err127(char **av, char *str_hist)
 {
 	char *error = NULL;
 	int len;
 
-	len = _strlen(ex_name) + _strlen(av[0]) + 14;
+	len = _strlen(ex_name) + _strlen(av[0]) + _strlen(str_hist) + 16;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 		return (NULL);
 
 	_strcpy(error, ex_name);
 	_strcat(error, ": ");
+	_strcat(error, str_hist);
+        _strcat(error, ": ");
 	_strcat(error, av[0]);
 	_strcat(error, ": not found\n");
 
@@ -112,18 +114,18 @@ int prt_error(char **av, int n_error)
 		msg_err = err126(av, str_hist);
 		break;
 	case 127:
-		msg_err = err127(av);
+		msg_err = err127(av, str_hist);
 		break;
 	case 2:
 		if (!(_strcmp(av[0], "exit")))
-			msg_err = err2_exit(av);
+			msg_err = err2_exit(av, str_hist);
 		break;
 	}
 
 	/*Print error message*/
-	prt_stdo(msg_err);
+	prt_stde(msg_err);
 
-	if (!str_hist)
+	if (str_hist)
 		free(str_hist);
 
 	if (msg_err)

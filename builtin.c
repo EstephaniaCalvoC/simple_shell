@@ -29,19 +29,12 @@ void b_exit(char **av, int *l_ret)
 		}
 	}
 	else if (ac == 1)
-	{
-		if (*l_ret != 127 && *l_ret != 126 && *l_ret)
-			n_return = 128 + *l_ret;
-		else
-			n_return = *l_ret;
-	}
+		n_return = *l_ret;
 
 	if (n_return != 2)
-	{
 		free(av);
 		free(line);
 		exit(n_return);
-	}
 }
 
 /**

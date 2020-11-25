@@ -12,6 +12,17 @@ void prt_stdo(char *str)
 	write(STDOUT_FILENO, str, s_len);
 }
 
+/**
+ * prt_stde - Print simple string with write in the stde.
+ * @str: String to print.
+ */
+void prt_stde(char *str)
+{
+        unsigned int s_len;
+
+        s_len = _strlen(str);
+        write(STDERR_FILENO, str, s_len);
+}
 
 /**
  * _atoi - Find and print the first number
