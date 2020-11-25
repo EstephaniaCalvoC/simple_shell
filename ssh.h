@@ -18,7 +18,7 @@
 
 /*Global Variables*/
 extern char **environ;/*Environemnt*/
-char *ex_name;/*Shell's executable name*/
+/*char *ex_name;Shell's executable name*/
 
 /*Structures*/
 
@@ -51,7 +51,10 @@ typedef struct builtin_s
 /*Prototypes*/
 
 /*Main helpers*/
+/*..getarray*/
 char **get_array(char *line);
+unsigned int count_lim(char *line, const char *limit);
+/*..execfun*/
 int execute(char **av, int *l_ret);
 int exc_ext(char **av);
 /*..builtin*/
