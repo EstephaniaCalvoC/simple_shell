@@ -90,18 +90,11 @@ char *_getpath(char **argv)
 	/*If the path is not complete*/
 	len = _strlen(argv[0]);
 	head_path = _create_path();
-	if (head_path == NULL)
-	{
-		return (NULL);
-	}
 	for (temp = head_path; temp != NULL; temp = temp->next)
 	{
 		path = malloc(sizeof(char) * (temp->len + len + 2));
 		if (!path)
-		{
-			free_list(head_path);
-			return (NULL);
-		}
+			break;
 		_strcpy(path, temp->dir);
 		_strcat(path, "/");
 		_strcat(path, argv[0]);
@@ -116,6 +109,7 @@ char *_getpath(char **argv)
 			path = NULL;
 		}
 	}
-	free_list(head_path);
+	if (head_path)
+		free_list(head_path);
 	return (NULL);
 }
