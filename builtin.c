@@ -31,10 +31,9 @@ void b_exit(char **av, int *l_ret)
 	else if (ac == 1)
 		n_return = *l_ret;
 
-	if (n_return != 2)
-		free(av);
-		free(line);
-		exit(n_return);
+	free(av);
+	free(line);
+	exit(n_return);
 }
 
 /**
