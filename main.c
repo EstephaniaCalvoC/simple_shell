@@ -7,18 +7,23 @@
  */
 int exc_ext(char **av)
 {
-	char *path = NULL;/*Complet command*/
+	char *path = NULL, *line = NULL;/*Complet command*/
 	pid_t child_pid;
 	int status, n_return = 0;
 
 	if (av)
 		path = _getpath(av);
-
+	printf("path: %s\n", path);
+	printf("entra a function exc ext\n");
 	/*Verify acces to command*/
 	if (!path || !av || (access(path, F_OK) == -1))
 	{
+		printf("entra a evaluar error 127 y 126\n");
 		if (errno == EACCES)
+		{
+			printf("entra a error 126\n");
 			return (prt_error(av, 126));
+		}
 		else
 			return (prt_error(av, 127));
 	}
@@ -34,6 +39,10 @@ int exc_ext(char **av)
 		execve(path, av, environ);
 		if (errno == EACCES)
 			n_return = prt_error(av, 126);
+		line = av[0];
+		free(path);
+		free(av);
+		free(line);
 		_exit(n_return);
 	}
 	else
@@ -42,7 +51,6 @@ int exc_ext(char **av)
 		n_return = WEXITSTATUS(status);
 	}
 	free(path);
-	free(av);
 	return (n_return);
 }
 
