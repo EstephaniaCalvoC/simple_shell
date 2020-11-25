@@ -18,10 +18,10 @@ void prt_stdo(char *str)
  */
 void prt_stde(char *str)
 {
-        unsigned int s_len;
+	unsigned int s_len;
 
-        s_len = _strlen(str);
-        write(STDERR_FILENO, str, s_len);
+	s_len = _strlen(str);
+	write(STDERR_FILENO, str, s_len);
 }
 
 /**

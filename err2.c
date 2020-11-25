@@ -20,7 +20,7 @@ char *err2_exit(char **av, char *str_hist)
 	_strcpy(error, ex_name);
 	_strcat(error, ": ");
 	_strcat(error, str_hist);
-        _strcat(error, ": ");
+	_strcat(error, ": ");
 	_strcat(error, av[0]);
 	_strcat(error, ": Illegal number: ");
 	_strcat(error, av[1]);

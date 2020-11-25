@@ -19,7 +19,7 @@ char *err127(char **av, char *str_hist)
 	_strcpy(error, ex_name);
 	_strcat(error, ": ");
 	_strcat(error, str_hist);
-        _strcat(error, ": ");
+	_strcat(error, ": ");
 	_strcat(error, av[0]);
 	_strcat(error, ": not found\n");
 
@@ -61,7 +61,7 @@ unsigned int count_dig(int num)
 	unsigned int i = 0;
 
 	for (; num > 0; i++)
-		num = num /10;
+		num = num / 10;
 
 	return (i);
 }
@@ -83,13 +83,11 @@ char *str_num(int n)
 	strn[l_dig] = '\0';
 
 	l_dig--;
-	do
-	{
+	do {
 		strn[l_dig] = (num % 10) + '0';
 		num /= 10;
 		l_dig--;
-	}
-	while (num > 0);
+	} while (num > 0);
 	return (strn);
 }
 
@@ -105,7 +103,7 @@ int prt_error(char **av, int n_error)
 	char *msg_err = NULL;/*Message error*/
 	char *str_hist = NULL;
 
-        str_hist = str_num(hist);
+	str_hist = str_num(hist);
 
 	/*Get message*/
 	switch (n_error)
