@@ -48,7 +48,6 @@ lpath *_create_path(void)
 	char *value = NULL;
 	char *word = NULL;
 	lpath *head = NULL;
-	int i = 0;/*Runner*/
 
 	value = _getenv("PATH");
 	if (!value || *value == '\0')
@@ -78,7 +77,7 @@ char *_getpath(char **argv)
 	lpath *head_path = NULL, *temp = NULL;
 	char *path = NULL;
 	struct stat buf;
-	int count = 0, len = 0;
+	int len = 0;
 
 	/*If the input is a complete path*/
 	if ((argv[0][0] == '/' || argv[0][0] == '.') &&

@@ -18,7 +18,7 @@
 
 /*Global Variables*/
 extern char **environ;/*Environemnt*/
-char *ex_name /*;Shell's executable name*/
+char *ex_name; /*;Shell's executable name*/
 
 /*Structures*/
 
@@ -80,6 +80,7 @@ char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
+int _strncmp(char *s1, char *s2, int n);
 
 /*Linked list helpers*/
 /*..list*/

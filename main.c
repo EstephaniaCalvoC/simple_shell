@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 
 	ex_name = argv[0];
 
-	while (1)
+	while (argc)
 	{
 		/*If is interactive mode*/
 		if (isatty(STDIN_FILENO) && fp == stdin)

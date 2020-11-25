@@ -6,11 +6,10 @@
  */
 void prt_stdo(char *str)
 {
-	ssize_t n_chars;
 	unsigned int s_len;
 
 	s_len = _strlen(str);
-	n_chars = write(STDOUT_FILENO, str, s_len);
+	write(STDOUT_FILENO, str, s_len);
 }
 
 

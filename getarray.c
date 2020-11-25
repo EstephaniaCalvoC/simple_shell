@@ -22,6 +22,7 @@ unsigned int count_lim(char *line, const char *limit)
 			i--;
 		}
 	}
+	return (contsp);
 }
 
 /**
