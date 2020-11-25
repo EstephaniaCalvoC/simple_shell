@@ -1,86 +1,6 @@
 #include "ssh.h"
 
 /**
- * get_array - Get array of command arguments
- * @line: Line of command
- * Return: Array of command arguments
- */
-char **get_array(char *line)
-{
-	const char limit[] = " ";
-	int i;/*Runer*/
-	int contsp = 0;/*Counter limit*/
-	int csp;/*Consecutive limit*/
-	char **array = NULL;
-
-	/*Count limit char*/
-	for (i = 0 ; line[i] != '\0'; i++)
-	{
-		for (csp = 0; line[i] == limit[0]; i++)
-			csp++;
-
-		if (line[i] != '\0' && csp > 0 && (i - 1) > csp)
-		{
-			contsp++;
-			i--;
-		}
-	}
-
-	/*Allocate memory*/
-	array = malloc(sizeof(char *) * (contsp + 2));
-	if (!array)
-		return (NULL);
-
-	/*Full array*/
-	array[0] = strtok(line, limit);
-	if (!array[0])
-	{
-		free(array);
-		return (NULL);
-	}
-
-	for (i = 1; i <= contsp; i++)
-	{
-		array[i] = strtok(NULL, limit);
-		if (!array[i])
-		{
-			free(array);
-			return (NULL);
-		}
-	}
-	array[i] = NULL;
-	return (array);
-}
-
-/**
- * execute - Execute a builtin commands or external commands.
- * @av: Arrays of command arguments
- * @l_ret: A pointer to number of the last return.
- * Return: The return value of the builtin command or external command.
-*/
-int execute(char **av, int *l_ret)
-{
-	int i;
-	builtin b_arr[] = {
-		{"exit", b_exit},
-		{"env", b_env},
-		{NULL, NULL}};
-
-	for (i = 0; b_arr[i].fname; i++)
-	{
-		if (strcmp(b_arr[i].fname, av[0]) == 0)
-			break;
-	}
-
-	if (b_arr[i].fun != NULL)
-	{
-		b_arr[i].fun(av, l_ret);
-		return (*l_ret);
-	}
-	return (exc_ext(av));
-}
-
-/**
  * exc_ext - Execute a command indicate in a string.
  * @av: Array of command arguments
  * Return: 0 if succes or -1 if fork fail.
@@ -95,11 +15,7 @@ int exc_ext(char **av)
 		path = _getpath(av);
 
 	/*Verify acces to command*/
-	if (!path)
-	{
-		return (prt_error(av, 127));
-	}
-	if (!av || (access(path, F_OK) == -1))
+	if (!path || !av || (access(path, F_OK) == -1))
 	{
 		if (errno == EACCES)
 			return (prt_error(av, 126));
@@ -108,13 +24,11 @@ int exc_ext(char **av)
 	}
 
 	child_pid = fork();
-
 	if (child_pid == -1)
 	{
 		perror("Error child:");
 		return (1);
 	}
-
 	if (child_pid == 0)
 	{
 		execve(path, av, environ);
