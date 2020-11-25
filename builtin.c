@@ -45,7 +45,7 @@ void b_exit(char **av, int *l_ret)
 }
 
 /**
- * b_evn - Print the enviroment variables
+ * b_env - Print the enviroment variables
  * @av: Array of arguments
  * @l_ret: Pointer to number of the last return
  */

@@ -18,7 +18,7 @@
 
 /*Global Variables*/
 extern char **environ;/*Environemnt*/
-/*char *ex_name;Shell's executable name*/
+char *ex_name /*;Shell's executable name*/
 
 /*Structures*/
 
