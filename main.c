@@ -13,17 +13,11 @@ int exc_ext(char **av)
 
 	if (av)
 		path = _getpath(av);
-	printf("path: %s\n", path);
-	printf("entra a function exc ext\n");
 	/*Verify acces to command*/
 	if (!path || !av || (access(path, F_OK) == -1))
 	{
-		printf("entra a evaluar error 127 y 126\n");
 		if (errno == EACCES)
-		{
-			printf("entra a error 126\n");
 			return (prt_error(av, 126));
-		}
 		else
 			return (prt_error(av, 127));
 	}

@@ -63,7 +63,8 @@ void b_env(char **av, int *l_ret)
 		i = 0;
 		while (environ[i] != NULL)
 		{
-			printf("%s\n", environ[i]);
+			prt_stdo(environ[i]);
+			prt_stdo("\n");
 			i++;
 		}
 		*l_ret = 0;

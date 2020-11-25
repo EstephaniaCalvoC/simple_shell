@@ -16,7 +16,7 @@ int execute(char **av, int *l_ret)
 
 	for (i = 0; b_arr[i].fname; i++)
 	{
-		if (strcmp(b_arr[i].fname, av[0]) == 0)
+		if (_strcmp(b_arr[i].fname, av[0]) == 0)
 			break;
 	}
 	if (b_arr[i].fun != NULL)

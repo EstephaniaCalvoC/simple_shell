@@ -31,7 +31,7 @@ lpath *add_node_end(lpath **head, char *str)
 		*head = n;
 
 	n->next = NULL;
-	n->dir = strdup(str);
+	n->dir = _strdup(str);
 	n->len = _strlen(str);
 	return (n);
 }
