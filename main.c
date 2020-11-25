@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 			prt_stdo("#cisfun$ ");
 		n_chars = getline(&line, &len, fp);
 		c_spaces = count_lim(line, " ");
-		if (c_spaces == 0 && line[0] == ' ')
+		if (c_spaces == 0 && line[0] == ' ' && line[n_chars - 1] == ' ')
 			break;
 		hist++;
 
