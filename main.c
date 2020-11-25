@@ -58,8 +58,7 @@ int main(int argc, char **argv)
 {
 	char *line = NULL, **av = NULL;
 	size_t len = 0;
-	int n_chars = 0;
-	int n_return = 0;
+	int n_chars = 0, n_return = 0, c_spaces = 0;
 	FILE *fp = stdin;
 
 	ex_name = argv[0];
@@ -71,6 +70,9 @@ int main(int argc, char **argv)
 		if (isatty(STDIN_FILENO) && fp == stdin)
 			prt_stdo("#cisfun$ ");
 		n_chars = getline(&line, &len, fp);
+		c_spaces = count_lim(line, " ");
+		if (c_spaces == 0 && line[0] == ' ')
+			break;
 		hist++;
 
 		if (n_chars == -1)
