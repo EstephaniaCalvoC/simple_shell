@@ -73,7 +73,7 @@ char *err2_exit(char **av, char *str_hist);
 /*..helpers*/
 void prt_stdo(char *str);
 int _atoi(char *s);
-
+void prt_stde(char *str);
 /*String helpers*/
 /*..str_f1*/
 unsigned int _strlen(char *str);
