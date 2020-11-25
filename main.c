@@ -80,6 +80,7 @@ int main(int argc, char **argv)
 			line[n_chars - 1] = '\0';
 			av = get_array(line);
 			n_return = execute(av, &n_return);
+			free(av);
 			free(line);
 			av = NULL;
 			line = NULL;

@@ -39,7 +39,6 @@ char **get_array(char *line)
 
 	/*Count limit char*/
 	contsp = count_lim(line, limit);
-
 	/*Allocate memory*/
 	array = malloc(sizeof(char *) * (contsp + 2));
 	if (!array)
