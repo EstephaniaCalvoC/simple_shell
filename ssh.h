@@ -23,7 +23,7 @@ char *ex_name;/*Shell's executable name*/
 /*Structures*/
 
 /**
- * struct list_p - Linked list of the PATH env values
+ * struct list_s - Linked list of the PATH env values
  * @dir: String with the dir
  * @len: Len of the dir
  * @next: Pointer to next node
@@ -38,11 +38,11 @@ typedef struct list_s
 } lpath;
 
 /**
- * struc bultin_b - A new struct type defining builtin commands.
- * @name: The name of the builtin command.
- * @f: A function pointer to the builtin command's function.
+ * struct builtin_s - A new struct type defining builtin commands.
+ * @fname: The name of the builtin command.
+ * @fun: A function pointer to the builtin command's function.
  */
-typedef struct bultin_s
+typedef struct builtin_s
 {
 	char *fname;
 	void (*fun)(char **av, int *l_ret);

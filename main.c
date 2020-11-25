@@ -16,8 +16,6 @@ char **get_array(char *line)
 	/*Count limit char*/
 	for (i = 0 ; line[i] != '\0'; i++)
 	{
-		//printf("Caracter: %c\n", line[i]);
-		//printf("Espacios: %d\n", contsp);
 		for (csp = 0; line[i] == limit[0]; i++)
 			csp++;
 
@@ -26,8 +24,6 @@ char **get_array(char *line)
 			contsp++;
 			i--;
 		}
-		/*if (line[i] == limit[0])
-		  contsp++;*/
 	}
 
 	/*Allocate memory*/
@@ -59,6 +55,7 @@ char **get_array(char *line)
 /**
  * execute - Execute a builtin commands or external commands.
  * @av: Arrays of command arguments
+ * @l_ret: A pointer to number of the last return.
  * Return: The return value of the builtin command or external command.
 */
 int execute(char **av, int *l_ret)
@@ -80,7 +77,7 @@ int execute(char **av, int *l_ret)
 		b_arr[i].fun(av, l_ret);
 		return (*l_ret);
 	}
-	return exc_ext(av);
+	return (exc_ext(av));
 }
 
 /**
@@ -100,7 +97,6 @@ int exc_ext(char **av)
 	/*Verify acces to command*/
 	if (!path)
 	{
-		//printf("El path es NULL");
 		return (prt_error(av, 127));
 	}
 	if (!av || (access(path, F_OK) == -1))

@@ -45,7 +45,7 @@ void b_exit(char **av, int *l_ret)
 }
 
 /**
- * evn - Print the enviroment variables
+ * b_evn - Print the enviroment variables
  * @av: Array of arguments
  * @l_ret: Pointer to number of the last return
  */
@@ -54,7 +54,7 @@ void b_env(char **av, int *l_ret)
 	unsigned int ac = 0, i;/*Runer*/
 
 	for (; av[ac]; ac++)
-                ;
+		;
 
 	if (ac != 1 || !environ)
 		*l_ret = 2; /*Pending- handle error*/

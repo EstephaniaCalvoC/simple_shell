@@ -68,7 +68,7 @@ int prt_error(char **av, int n_error)
 		msg_err = err127(av);
 		break;
 	case 2:
-		if (!(_strcmp(av[0],"exit")))
+		if (!(_strcmp(av[0], "exit")))
 			msg_err = err2_exit(av);
 		break;
 	}
