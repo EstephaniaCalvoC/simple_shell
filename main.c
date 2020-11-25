@@ -81,7 +81,8 @@ int main(int argc, char **argv)
 		}
 		else if (*line != '\n')
 		{
-			line[n_chars - 1] = '\0';
+			if (line[n_chars - 1] == '\n')
+				line[n_chars - 1] = '\0';
 			av = get_array(line);
 			n_return = execute(av, &n_return);
 			free(av);
