@@ -26,12 +26,13 @@ char *_getenv(char *name)
 		{
 			value = environ[i] + len;
 			value = _strdup(value);
-			if (value)
-			{
+			if (value && _strlen(value))
 				return (value);
-			}
 			else
+			{
+				free(value);
 				return (NULL);
+			}
 		}
 		i++;
 	}
