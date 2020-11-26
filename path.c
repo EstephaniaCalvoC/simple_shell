@@ -24,7 +24,7 @@ char *_getenv(char *name)
 		/*If value if found*/
 		if (b == 0)
 		{
-			value = environ[i] + len + 1;
+			value = environ[i] + len;
 			value = _strdup(value);
 			if (value)
 			{
@@ -49,7 +49,7 @@ lpath *_create_path(void)
 	char *word = NULL;
 	lpath *head = NULL;
 
-	value = _getenv("PATH");
+	value = _getenv("PATH=");
 	if (!value || *value == '\0')
 		return (NULL);
 
