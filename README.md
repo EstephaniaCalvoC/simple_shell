@@ -2,7 +2,7 @@
 
 ![Cover of sHELL](https://semanticadigital.com/wp-content/uploads/2017/01/shell-gf.gif)
 
-![Cd](https://semanticadigital.com/wp-content/uploads/2017/01/cd-g.png)
+![Cd](https://semanticadigital.com/wp-content/uploads/2017/01/trs.gif)
 
 A simple UNIX command interpreter making as a final project of the low-level programming and algorithm quarter at Holberton School.
 
@@ -88,7 +88,7 @@ drwxrwxr-x  7 vagrant vagrant 4096 Nov 24 03:33 temptest
 **Loop flowchart**
 ![flowcharloop](https://semanticadigital.com/wp-content/uploads/2017/01/Flowchart-llop.jpg)
 **Execute flowchart**
-![flowcharexecute](hhttps://semanticadigital.com/wp-content/uploads/2017/01/Flowchart-execute.jpg)
+![flowcharexecute](https://semanticadigital.com/wp-content/uploads/2017/01/Flowchart-execute.jpg)
 
 
 ## Authors
