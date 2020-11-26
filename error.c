@@ -4,6 +4,7 @@
  * err127 - Creates an error message for the error number \
 127.
 * @av: Array of command arguments.
+* @str_hist: Array with the history number.
 * Return: A string with the error message.
 */
 char *err127(char **av, char *str_hist)
@@ -29,6 +30,7 @@ char *err127(char **av, char *str_hist)
 /**
  * err126 - Creates an error message for the error number 126.
  * @av: Array of command arguments.
+ * @str_hist: Array with the history number.
  * Return: A string with the error message.
  */
 char *err126(char **av, char *str_hist)
@@ -69,11 +71,10 @@ unsigned int count_dig(int num)
 /**
  * str_num - Create a string of a number
  * @n: Number
- * Retrun: A string
+ * Return: A string
  */
 char *str_num(int n)
 {
-
 	unsigned int l_dig = count_dig(n);
 	char *strn = NULL;
 	int num = n;

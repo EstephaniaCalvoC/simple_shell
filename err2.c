@@ -4,6 +4,7 @@
  * err2_exit - Creates an error message for the error number \
 2 from exit function.
 * @av: Array of command arguments.
+* @str_hist: Array with the history number.
 * Return: A string with the error message.
 */
 char *err2_exit(char **av, char *str_hist)
