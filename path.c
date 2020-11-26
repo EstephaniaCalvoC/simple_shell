@@ -28,11 +28,8 @@ char *_getenv(char *name)
 			value = _strdup(value);
 			if (value && _strlen(value))
 				return (value);
-			else
-			{
-				free(value);
-				return (NULL);
-			}
+			free(value);
+			return (NULL);
 		}
 		i++;
 	}
