@@ -84,7 +84,7 @@ drwxrwxr-x  7 vagrant vagrant 4096 Nov 24 03:33 temptest
 
 ## flowcharts
 **Main flowchart**
-![flowcharmain](https://semanticadigital.com/wp-content/uploads/2017/01/Flowchart-main.jpg)
+![flowcharmain](https://semanticadigital.com/wp-content/uploads/2017/01/Flowchart-main-2.jpg)
 **Loop flowchart**
 ![flowcharloop](https://semanticadigital.com/wp-content/uploads/2017/01/Flowchart-llop.jpg)
 **Execute flowchart**
